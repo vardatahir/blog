@@ -1,6 +1,6 @@
 class BlogPostsController <ApplicationController
   def index
-    @blog_posts = BlogPost.all
+    @blog_posts = user_signed_in? ? BlogPost.all : BlogPost.published
   end
 
   def show
@@ -23,7 +23,6 @@ class BlogPostsController <ApplicationController
   end
 
   def edit
-    @blog_post = BlogPost.find(params[:id])
   end
 
   def update
@@ -35,9 +34,20 @@ class BlogPostsController <ApplicationController
     end
   end
 
+  def destroy
+    @blog_post.destroy
+    redirect_to root_path
+  end
+
   private
 
   def blog_post_params
     params.require(:blog_post).permit(:title, :body)
+  end
+
+  def set_blog_postring
+    @blog_post = user_signed_in? ? BlogPost.find(params[:id]) : BlogPost.published.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path
   end
 end
