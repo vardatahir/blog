@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2024_10_07_111315) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "published_at"
+    t.text "content"
   end
 
   create_table "users", force: :cascade do |t|
