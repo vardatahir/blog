@@ -59,4 +59,4 @@ gem "devise", "~> 4.9"
 
 gem "tailwindcss-rails", "~> 2.5"
 
-gem "pagy", "~> 9.1"
+gem "pagy", "~> 9.1" # or "9.1.1"
